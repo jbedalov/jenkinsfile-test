@@ -5,7 +5,7 @@ node {
         } catch (err) {
             currentBuild.result = 'FAILURE'
         } finally {
-            cleanWs cleanWhenFailure: false
+            echo 'all done!'
         }
     }
 }
