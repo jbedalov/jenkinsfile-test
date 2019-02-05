@@ -1,21 +1,11 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+node {
+    ws ('/var/jenkins_home/workspace/foo'){
+        try {
+            writeFile file: 'foo.txt', text: 'foobar'
+        } catch (err) {
+            currentBuild.result = 'FAILURE'
+        } finally {
+            cleanWs cleanWhenFailure: false
         }
     }
 }
